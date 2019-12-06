@@ -1,10 +1,17 @@
 <?php
-require_once('DataBase.php');
 //include_once('../functions/control-session.php');
-require_once('../functions/functions.php');
-class User {
-    private $username, $password;
+include_once('Controller/Class/DataBase.php');
+require_once('Controller/functions/functions.php');
+global $msg;
 
+class User{
+    private $username, $password, $status;
+
+    /**
+     * @brief User constructor.
+     * @param $username
+     * @param $password
+     */
     public function __construct($username, $password) {
 
         $this->username = $username;
@@ -12,67 +19,94 @@ class User {
 
     }
 
-    public function signUp($verif_mdp) {
-        //Check si pseudo, mdp et verif_mdp sont valides
-        //hash mdp et verif_mdp
-        //Inserer dans bdd
-        $bdd = new ConnexionBDD();
-        $con = $bdd->getCon();
+    /**
+     * @brief Sign up a new user
+     * @param $verif_pass password confirmation
+     */
+    public function signUp($verif_pass) {
+        //check if credentials are vaild
+        //hash password
 
-        if(checkMdp($this->mdp) && equivMdp($this->mdp, $verif_mdp) && checkPseudo($this->pseudo) && checkExistPseudo($this->pseudo)) {
-            //Hashage du mdp
-            $hash_mdp = sha1($this->mdp);
+        global $msg;
 
-            //Inserer valeurs$password
-            $requete = "INSERT INTO users (PSEUDO, PASSWORD) VALUES (?, ?)";
-            $stmt = $con->prepare($requete);
-            $stmt->execute([$this->pseudo, $hash_mdp]);
 
-            //Afficher msg de succès
-            $msg .= "<p>Votre compte est crée! <a href='connexion.php'>Connexion ici</a></p>";
+
+        if(checkPassword($this->password) && equivPassword($this->password, $verif_pass) && checkUsername($this->username) && checkExistUsername($this->username)) {
+            //passwordHash
+            $hash_password = sha1($this->password);
+
+            $db = new DB();
+            if(!$db) {
+                echo $db->lastErrorMsg();
+            }
+
+            $sql = <<<EOF
+    INSERT INTO user (userName, password) VALUES ('$this->username', '$hash_password');
+EOF;
+
+            $ret = $db->query($sql);
+
+
+            $msg .= "<p>Account created <a href='A INSERER'>Login here</a></p>";
 
         } else {
-            $msg .= "<p>Inscription non effectuée</p>";
+            $msg .= "<p>Error signup</p>";
         }
     }
 
-    public function connexion() {
-        //Check si pseudo, mdp sont valides
-        //hash mdp
-        //Comparer pseudo et mdp avec bdd
+    /**
+     * @brief login a user using entered credentials
+     */
+    public function login() {
+        //Check if username is not vaild
+        //hash password
         global $msg;
-        $bdd = new ConnexionBDD();
-        $con = $bdd->getCon();
 
-        if(checkMdp($this->mdp) && checkPseudo($this->pseudo)) {
+
+        if(checkPassword($this->password) && checkUsername($this->username)) {
             //Hashage du mdp
-            $hash_mdp = sha1($this->mdp);
+            $hash_password = sha1($this->password);
 
             //Inserer valeurs
-            $requete = "SELECT * FROM users WHERE PSEUDO = ? AND PASSWORD= ?";
-            $stmt = $con->prepare($requete);
-            $stmt->execute([$this->pseudo, $hash_mdp]);
-            $result = $stmt->rowCount();
 
-            if($result == 1) {
+
+
+            $db = new DB();
+            if(!$db) {
+                echo $db->lastErrorMsg();
+            }
+            $result = $db->query("SELECT * FROM User WHERE userName = '$this->username' AND password= '$hash_password'");
+            $rows = 0;
+
+            while($row = $result->fetchArray()) {
+                $rows += 1; //+1 to the counter per row in result
+            }
+
+            if(rows == 1) {
                 session_start();
-                $infoUser = $stmt->fetch();
-                $_SESSION['ID'] = $infoUser['ID_USER'];
-                $_SESSION['PSEUDO'] = $infoUser['PSEUDO'];
+                $infoUser = $result->fetch();
+                $_SESSION['ID'] = $infoUser['idUser'];
+                $_SESSION['USERNAME'] = $infoUser['userName'];
+                $_SESSION['STATUS'] = $infoUser['status'];
+                $this->status = $infoUser['status'];
                 $User_ID = $infoUser;
 
-                $msg .= "<p>Connexion reussie</p>";
-                echo "user connecté";
-                redirect('training.php');
+                $msg .= "<p>login success</p>";
+                echo "Connected";
+                redirect('INDEX A REMETTRE PLUSTARD');
             } else {
-                $msg .= "<p>Mauvaise combis pseudo/mdp</p>";
+                $msg .= "<p>Bad credentials</p>";
             }
         }
     }
-    public function deconnexion() {
+
+    /**
+     * @brief disconned user and clear session and all it's temporary data
+     */
+    public function disconnect() {
         session_unset();
         session_destroy();
-        echo "User deconnecté";
+        echo "Disconnected";
     }
 }
 //$pseudo = "Matt";

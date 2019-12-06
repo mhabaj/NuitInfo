@@ -12,6 +12,20 @@
       <executable />
     </execution>
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -22,9 +36,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="C:/wamp64/www/WebTV/Controller/Class/User.php" />
+    <property name="last_opened_file_path" value="C:/wamp64/www/WebTV" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="ServiceViewManager">
@@ -32,7 +47,17 @@
       <list>
         <serviceView>
           <treeState>
-            <expand />
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:MySQL - test@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:MySQL - test@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@3e566906" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+            </expand>
             <select />
           </treeState>
         </serviceView>
@@ -50,7 +75,7 @@
       <option name="presentableId" value="Default" />
       <updated>1575578379113</updated>
       <workItem from="1575578381621" duration="2998000" />
-      <workItem from="1575582177952" duration="3290000" />
+      <workItem from="1575582177952" duration="15709000" />
     </task>
     <servers />
   </component>
@@ -58,10 +83,18 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2660" y="334" key="FileChooserDialogImpl" timestamp="1575582413486">
+    <state x="2334" y="234" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575589337605">
       <screen x="1920" y="0" width="1920" height="1160" />
     </state>
-    <state x="2660" y="334" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1575582413486" />
+    <state x="2334" y="234" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1575589337605" />
+    <state x="2660" y="334" key="FileChooserDialogImpl" timestamp="1575600933602">
+      <screen x="1920" y="0" width="1920" height="1160" />
+    </state>
+    <state x="2660" y="334" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1575600933602" />
+    <state x="2714" y="502" key="NewPhpFileDialog" timestamp="1575591907221">
+      <screen x="1920" y="0" width="1920" height="1160" />
+    </state>
+    <state x="2714" y="502" key="NewPhpFileDialog/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1575591907221" />
     <state x="461" y="161" key="SettingsEditor" timestamp="1575580576760">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -70,5 +103,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="661" y="342" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1575582179075" />
+    <state x="2536" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1575589729294">
+      <screen x="1920" y="0" width="1920" height="1160" />
+    </state>
+    <state x="2536" y="233" width="670" height="676" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1575589729294" />
   </component>
 </project>
