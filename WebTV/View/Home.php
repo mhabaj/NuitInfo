@@ -47,9 +47,14 @@ session_start();// ici on continue la session
                }
                if( $_SESSION['STATUS'] == 1 ){ //1 is moderator
                 ?>
+
                 <a class="nav-item text-light" href="ModeratorView.php">
                     <span class="far fa-user fa-2x"></span> Moderator View
                 </a>
+                   <form method="POST" >
+                       <button class="btn btn-primary text-center" type="submit" name="Disconnect"> Disconnect </button>
+
+                   </form>
              <?php
             } if ( $_SESSION['STATUS'] == 0) { //0 is streamer
                 ?>
@@ -59,6 +64,10 @@ session_start();// ici on continue la session
                    <a class="nav-item text-light" href="AddModerator.php">
                        <span class="far fa-user fa-2x"></span> Add Moderator
                    </a>
+                   <form method="POST" >
+                       <button class="btn btn-primary text-center" type="submit" name="Disconnect"> Disconnect </button>
+
+                   </form>
 
             <?php
                }

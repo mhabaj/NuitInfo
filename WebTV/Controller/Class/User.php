@@ -20,41 +20,6 @@ class User{
     }
 
     /**
-     * @brief Sign up a new user
-     * @param $verif_pass password confirmation
-     */
-    public function signUp($verif_pass) {
-        //check if credentials are vaild
-        //hash password
-
-        global $msg;
-
-
-
-        if(checkPassword($this->password) && equivPassword($this->password, $verif_pass) && checkUsername($this->username) && checkExistUsername($this->username)) {
-            //passwordHash
-            $hash_password = sha1($this->password);
-
-            $db = new DB();
-            if(!$db) {
-                echo $db->lastErrorMsg();
-            }
-
-            $sql = <<<EOF
-    INSERT INTO user (userName, password, status) VALUES ('$this->username', '$hash_password', 2);
-EOF;
-
-            $ret = $db->query($sql);
-
-
-            $msg .= "<p>Account created <a href='A INSERER'>Login here</a></p>";
-
-        } else {
-            $msg .= "<p>Error signup</p>";
-        }
-    }
-
-    /**
      * @brief login a user using entered credentials
      */
     public function login() {
@@ -98,13 +63,52 @@ EOF;
                     redirect('Home.php');
                 }
             }
-            } else {
-                $msg .= "<p>Bad credentials</p>";
-            }
+            $msg .= "<p>Wrong Credentials</p>";
+
+        } else {
+            $msg .= "<p>Bad credentials</p>";
+        }
     }
 
     /**
-     * @brief disconned user and clear session and all it's temporary data
+     * @brief Sign up a new user
+     * @param $verif_pass password confirmation
+     */
+    public function signUp($verif_pass) {
+        //check if credentials are vaild
+        //hash password
+
+        global $msg;
+
+
+
+        if(checkPassword($this->password) && equivPassword($this->password, $verif_pass) && checkUsername($this->username) && checkExistUsername($this->username)) {
+            //passwordHash
+            $hash_password = sha1($this->password);
+
+            $db = new DB();
+            if(!$db) {
+                echo $db->lastErrorMsg();
+            }
+
+            $sql = <<<EOF
+    INSERT INTO user (userName, password, status) VALUES ('$this->username', '$hash_password', 2);
+EOF;
+
+            $ret = $db->query($sql);
+
+
+            $user = new User($this->username, $this->password);
+
+            $user->login();
+
+        } else {
+            $msg .= "<p>Error signup</p>";
+        }
+    }
+
+    /**
+     * @brief disconnect user and clear session and all it's temporary data
      */
     public function disconnect() {
         session_unset();
@@ -112,12 +116,5 @@ EOF;
         echo "Disconnected";
     }
 }
-//$pseudo = "Matt";
-//$mdp = "123456";
-//$verif_mdp = "123456";
-/*$user = new User($pseudo, $mdp, $verif_mdp);
-$user->inscription();
-var_dump($msg);
-*/
-//$log_file->close();
+
 ?>

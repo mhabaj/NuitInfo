@@ -50,7 +50,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1575600937740</updated>
-      <workItem from="1575600938968" duration="7965000" />
+      <workItem from="1575600938968" duration="11198000" />
     </task>
     <servers />
   </component>
@@ -58,6 +58,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="2683" y="393" key="NewPhpClassDialog" timestamp="1575609907565">
+      <screen x="1920" y="0" width="1920" height="1160" />
+    </state>
+    <state x="2683" y="393" key="NewPhpClassDialog/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1575609907565" />
     <state x="2543" y="255" width="672" height="678" key="search.everywhere.popup" timestamp="1575608787230">
       <screen x="1920" y="0" width="1920" height="1160" />
     </state>
