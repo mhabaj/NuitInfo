@@ -1,7 +1,7 @@
 <?php
 //include_once('../functions/control-session.php');
-include_once('Controller/Class/DataBase.php');
-require_once('Controller/functions/functions.php');
+include_once('../Controller/Class/DataBase.php');
+require_once('../Controller/functions/functions.php');
 global $msg;
 
 class User{
@@ -41,7 +41,7 @@ class User{
             }
 
             $sql = <<<EOF
-    INSERT INTO user (userName, password) VALUES ('$this->username', '$hash_password');
+    INSERT INTO user (userName, password, status) VALUES ('$this->username', '$hash_password', 2);
 EOF;
 
             $ret = $db->query($sql);
@@ -78,26 +78,29 @@ EOF;
             $result = $db->query("SELECT * FROM User WHERE userName = '$this->username' AND password= '$hash_password'");
             $rows = 0;
 
-            while($row = $result->fetchArray()) {
+            while($row = $result->fetchArray(SQLITE3_ASSOC)) {
                 $rows += 1; //+1 to the counter per row in result
             }
 
-            if(rows == 1) {
-                session_start();
-                $infoUser = $result->fetch();
-                $_SESSION['ID'] = $infoUser['idUser'];
-                $_SESSION['USERNAME'] = $infoUser['userName'];
-                $_SESSION['STATUS'] = $infoUser['status'];
-                $this->status = $infoUser['status'];
-                $User_ID = $infoUser;
+            if($rows == 1) {
+                $res = null;
+                while($res = $result->fetchArray(SQLITE3_ASSOC)) {
 
-                $msg .= "<p>login success</p>";
-                echo "Connected";
-                redirect('INDEX A REMETTRE PLUSTARD');
+                    session_start();
+                    $_SESSION['ID'] = $res['idUser'];
+                    $_SESSION['USERNAME'] = $res['userName'];
+                    $_SESSION['STATUS'] = $res['status'];
+                    $this->status = $res['status'];
+                    $_SESSION['STATUS'] = $res['status'];
+
+                    $msg .= "<p>login success</p>";
+
+                    redirect('Home.php');
+                }
+            }
             } else {
                 $msg .= "<p>Bad credentials</p>";
             }
-        }
     }
 
     /**
